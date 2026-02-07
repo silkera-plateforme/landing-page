@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silkera - منصة تربية دود الحرير المتكاملة | قيد التجهيز</title>
+    
+    <!-- Google Fonts (Cairo for Arabic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS Variables for Easy Customization --- */
+        :root {
+            --primary-dark: #1a2f0a;
+            --primary-color: #2d5016;
+            --secondary-color: #5a9216;
+            --accent-color: #8bc34a;
+            --light-accent: #c5e1a5;
+            --light-color: #f1f8e9;
+            --bg-light: #fafafa;
+            --text-color: #444;
+            --heading-color: #2d5016;
+            --white-color: #ffffff;
+            --font-family: 'Cairo', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        /* --- Global Styles & Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--white-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--heading-color);
+        }
+
+        h1 { font-size: 3.5rem; color: var(--white-color); text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        h2 { font-size: 2.8rem; text-align: center; margin-bottom: 3rem; position: relative; padding-bottom: 1rem;}
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to left, var(--secondary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+        h3 { font-size: 1.8rem; }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all var(--transition-speed) ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(90, 146, 22, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(90, 146, 22, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--white-color);
+            color: var(--white-color);
+        }
+        .btn-outline:hover {
+            background: var(--white-color);
+            color: var(--primary-color);
+        }
+
+        .section-content {
+            padding: 80px 0;
+        }
+        .section-content-alt {
+            background-color: var(--bg-light);
+        }
+
+        /* --- Animations --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            padding: 15px 0;
+        }
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 55px;
+            transition: height var(--transition-speed) ease;
+        }
+        header.scrolled .logo img {
+            height: 45px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+            transition: color var(--transition-speed) ease;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width var(--transition-speed) ease;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            background: linear-gradient(rgba(26, 47, 10, 0.8), rgba(45, 80, 22, 0.8)), url('https://blogger.googleusercontent.com/img/a/AVvXsEhZH7ryXRdc8_qi7g3ibW5K3zvGBTCzIVSLELw45HByO8ZiKKKW7EQyK2jSFZdqDZg6DJ7YBOqezzSH7NBWr26n3GSy0HewucXrYmXs1UZizXYivTgQDrLd8O1HxlOH42g9nQwp4CAsC8qLEVlRNEKvVq55XVRI7ca3OXxyzpSMESfVbudT8BfKwh5MVQ') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white-color);
+            padding-top: 90px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+        
+        .hero-buttons .btn {
+            margin: 0.5rem;
+        }
+
+        /* --- About Us Section --- */
+        #about .about-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        #about .about-text {
+            flex: 1;
+        }
+
+        #about .about-image {
+            flex: 1;
+            position: relative;
+        }
+        #about .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            border-radius: 10px;
+            z-index: -1;
+        }
+
+        #about .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        /* --- Services Section --- */
+        #services .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--white-color);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-card i {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            transition: color var(--transition-speed) ease;
+        }
+        .service-card:hover i {
+            color: var(--primary-dark);
+        }
+
+        /* --- Coming Soon Section --- */
+        #coming-soon {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+            color: var(--white-color);
+            text-align: center;
+            padding: 100px 0;
+        }
+        #coming-soon h2 {
+            color: var(--white-color);
+        }
+        #coming-soon h2::after {
+            background: var(--white-color);
+        }
+        #coming-soon img {
+            max-width: 80%;
+            height: auto;
+            margin-top: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        /* --- Survey & Join Sections --- */
+        #survey, #join {
+            background-color: var(--bg-light);
+        }
+        .action-container {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        .action-text { flex: 1; }
+        .action-image { flex: 1; }
+        .action-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--primary-dark);
+            color: var(--light-color);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-content h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .footer-content p {
+            line-height: 1.8;
+        }
+
+        .footer-content ul {
+            list-style: none;
+        }
+
+        .footer-content ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-content ul li a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease, padding-right var(--transition-speed) ease;
+            display: inline-block;
+        }
+
+        .footer-content ul li a:hover {
+            color: var(--accent-color);
+            padding-right: 5px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-left: 10px;
+            transition: background var(--transition-speed) ease;
+            color: #f0f0f0;
+        }
+        .social-links a:hover {
+            background: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* --- WhatsApp Floating Button --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            background-color: #25d366;
+            color: var(--white-color);
+            border-radius: 50px;
+            text-align: center;
+            font-size: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 2.5s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+
+        .whatsapp-float i {
+            width: 65px;
+            height: 65px;
+            line-height: 65px;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* --- Sub-Pages (Survey & Signup) --- */
+        .sub-page {
+            display: none;
+            padding: 120px 0 4rem 0;
+            min-height: 100vh;
+            background-color: var(--bg-light);
+        }
+        .sub-page.active {
+            display: block;
+        }
+        .sub-page .container {
+            background: var(--white-color);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .back-button {
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            transition: background var(--transition-speed) ease;
+        }
+        .back-button:hover {
+            background: var(--primary-dark);
+        }
+        .google-form-container {
+            width: 100%;
+            min-height: 700px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            .about-container, .action-container {
+                flex-direction: column;
+            }
+            .about-image, .action-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .container { padding: 0 15px; }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background: var(--white-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links li { margin: 1rem 0; }
+
+            .menu-toggle {
+                display: block;
+                z-index: 1001;
+            }
+
+            .hero-buttons .btn {
+                display: block;
+                width: 80%;
+                margin: 1rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header id="header">
+        <nav class="container">
+            <a href="#" class="logo">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEiivDVoTfHTJuZM0-W54_QgT1WOXtZmykDPjER90CxEgmOMZAqMJoy7OATmpoO4v1pJyUfo7REwV1jagZXLeDHMD7HZrz3iWMrs7GJf6p-NApkNG5PMPtEwGIONBazcPYr1GnrNn5Fr8Ip7hnbKK_XmjvZaV0Fb9RPCfbWAdwJoJb_8pIqm35a1hN26lw" alt="Silkera Logo">
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#hero" onclick="closeMobileMenu()">الرئيسية</a></li>
+                <li><a href="#about" onclick="closeMobileMenu()">من نحن</a></li>
+                <li><a href="#services" onclick="closeMobileMenu()">خدماتنا</a></li>
+                <li><a href="#survey" onclick="closeMobileMenu()">استبيان</a></li>
+                <li><a href="#join" onclick="closeMobileMenu()">انضم إلينا</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container hero-content fade-in-up">
+                <h1>Silkera</h1>
+                <p>منصتك المتكاملة لتعلم وتطوير وتجارة تربية دود الحرير. انطلق في عالم الحرير من بوابتك الأولى.</p>
+                <div class="hero-buttons">
+                    <a href="#join" class="btn">انضم إلينا</a>
+                    <a href="#survey" class="btn btn-outline">شارك برأيك</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="section-content">
+            <div class="container">
+                <div class="about-container fade-in-up">
+                    <div class="about-text">
+                        <h2>من نحن</h2>
+                        <p>Silkera ليست مجرد منصة، بل هي رؤية لبناء مجتمع عربي متكامل في مجال تربية دود الحرير. نهدف إلى تمكين الأفراد والمؤسسات من تحويل المعرفة إلى مشاريع ناجحة ومستدامة، من خلال توفير تعليم احترافي، وسوق موثوق، وبيئة داععة للنمو.</p>
+                        <p>نحن نؤمن بأن المستقبل يكمن في الاستغلال الأمثل للموارد الطبيعية، ودود الحرير هو كنز لم يتم استغلاله بعد في منطقتنا. انضم إلينا في رحلتنا لإطلاق ثورة الحرير العربية.</p>
+                    </div>
+                    <div class="about-image">
+                        <img style="max-width: 450px; min-width: 100px;" src="https://blogger.googleusercontent.com/img/a/AVvXsEjk42hVFwcKOIprou8cOH6r7VRQ8nbOOdsuOHmnLdq86X9Dp-uGEngh6DtAlVnuL2uldRrMAeCfzGfSaXYpOz3gwMMavDXmVJn8mZiOEj5GwmIp2KWdKTli_7FW3WvEcVrYbRF1iGnbE15kRrtsJk4Qf_Cch22uUH_2TQyj_hwOV5B-fR3XD-XgEOGWTA" alt="About Silkera">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section-content section-content-alt">
+            <div class="container">
+                <h2 class="fade-in-up">خدماتنا الأساسية</h2>
+                <div class="services-grid">
+                    <div class="service-card fade-in-up">
+                        <i class="fas fa-book-open"></i>
+                        <h3>كورسات احترافية</h3>
+                        <p>محتوى تعليمي منظم وعملي يغطي كل جوانب تربية دود الحرير، من الصفر حتى الاحتراف. تجنب الأخطاء الشائعة وابدأ مشروعك على أسس علمية صحيحة.</p>
+                    </div>
+                    <div class="service-card fade-in-up">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>السوق الإلكتروني</h3>
+                        <p>منصة موثوقة لشراء كل مستلزماتك (بيض، علاف، أدوات) وبيع منتجاتك (شرانق، خيوط) مباشرة لمجتمع مستهدف، مما يوفر عليك الوقت والجهد ويضمن لك أرباحًا مباشرة.</p>
+                    </div>
+                    <div class="service-card fade-in-up">
+                        <i class="fas fa-headset"></i>
+                        <h3>استشارات أونلاين</h3>
+                        <p>تواصل مع خبراء متخصصين لحل أي مشكلة تواجهك في مزرعتك. احصل على حلول سريعة وفعالة لتقليل الخسائر وزيادة إنتاجيتك.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coming Soon Section -->
+        <section id="coming-soon">
+            <div class="container fade-in-up">
+                <h2>قريباً.. تطبيق Silkera</h2>
+                <p>نحن نعمل بجد لتقديم تجربة أفضل وأكثر سهولة من خلال تطبيق الموبايل الخاص بنا. كن على اطلاع بكل جديد!</p>
+                <img style="max-width: 400px; min-width: 100px;" src="https://blogger.googleusercontent.com/img/a/AVvXsEi8-bgY1u09znuxUfFBlcXOZWzhzTLozmNV-CVOil4dW02_a-oytFOfYTo-6nLfdEPus_QaMni2N0h_0_Qugtv28yMabXuEfOSx_TVdKRnEdfU6ox4nYSberNzWu_YRhD4hQKA19RgoLGJ795IQzmPd2VOI4B2-m7_MTzHCHgzoJE4N6UsPcOMqTNnDSg" alt="App Coming Soon">
+            </div>
+        </section>
+
+        <!-- Survey Section -->
+        <section id="survey" class="section-content">
+            <div class="container">
+                <div class="action-container fade-in-up">
+                    <div class="action-text">
+                        <h2>ساعدنا في التحسين</h2>
+                        <p>رأيك يهمنا! شارك في استبياننا لمساعدتنا على بناء منصة تلبي احتياجاتك وتوقعاتك بالكامل. استغرق دقائق قليلة لتكون شريكًا في نجاحنا.</p>
+                        <a href="#" class="btn" onclick="showPage('survey-page'); return false;">املأ الاستبيان الآن</a>
+                    </div>
+                    <div class="action-image">
+                        <img style="max-width: 450px; min-width: 100px;" src="https://blogger.googleusercontent.com/img/a/AVvXsEiVzGheizFWOJTDOGTv2vmv0E0b8GlhZFAB2u1T1GAiXLS2nhI-FbCh3Jiv1zCVQZs71X-F24X9M14CP28ACgwt67BUpULne5W9LER4q8kB0CO6ETsT2ZTnS_gyefu4VAR24pmmAqU8aylMQm_9vrZJrrneYwOuRrNCKMtN16S_2xpzaPtuHRJqal3Rxg" alt="Survey">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Us Section -->
+        <section id="join" class="section-content section-content-alt">
+            <div class="container">
+                <div class="action-container fade-in-up">
+                    <div class="action-image">
+                        <img style="max-width: 450px; min-width: 100px;" src="https://blogger.googleusercontent.com/img/a/AVvXsEh9QIFpSazVOoP1uJ3fq5A0TpYqElx6hxP5udNfxoPVn4O33rj9FcLqH0xs7BWdTZZv_LVhonnQl9fjpZzc0Z5U0l3MzrAGCTeRSnRtU-rvNs3_vokLl0pw7h-1RpqltQcVFXjTHeLR_NIVqIddvQYbXTft2NK5YK7tv1KQfUZIqy39zT8enj_bK8e6tg" alt="Join Us">
+                    </div>
+                    <div class="action-text">
+                        <h2>انضم إلينا</h2>
+                        <p>كن من أوائل المستخدمين الذين يستكشفون عالم تربية دود الحرير مع Silkera. سجل اهتمامك الآن واحصل على أخبار حصرية وعروض خاصة عند إطلاق المنصة.</p>
+                        <a href="#" class="btn" onclick="showPage('signup-page'); return false;">سجل اهتمامك</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Survey Page (Hidden by default) -->
+    <div id="survey-page" class="sub-page">
+        <div class="container">
+            <a href="#" class="back-button" onclick="showPage('main'); return false;">
+                <i class="fas fa-arrow-right"></i> العودة للصفحة الرئيسية
+            </a>
+            <h2>استبيان Silkera</h2>
+            <p>شكراً لك على وقتك. يرجى ملء النموذج أدناه.</p>
+            <div class="google-form-container" style="display: flex;flex-direction: column; align-items: center;justify-content: center;">
+                <iframe style="max-width: 100%; min-width: 50px;" src="https://docs.google.com/forms/d/e/1FAIpQLSfJnq2626PClaNgzGDIbWQYQbLCpb2H2vxjFSyvPS8ynJ4_eg/viewform?embedded=true" width="640" height="2149" frameborder="0" marginheight="0" marginwidth="0">جارٍ التحميل…</iframe>
+                <p style="text-align: center; padding: 50px; background: #f0f0f0; border-radius: 5px;">
+                    <!-- <strong>ملاحظة:</strong> قم بلصق كود النموذج المضمن من Google Forms هنا ليظهر بدلاً من هذا النص. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Page (Hidden by default) -->
+    <div id="signup-page" class="sub-page">
+        <div class="container">
+            <a href="#" class="back-button" onclick="showPage('main'); return false;">
+                <i class="fas fa-arrow-right"></i> العودة للصفحة الرئيسية
+            </a>
+            <h2>سجل اهتمامك في Silkera</h2>
+            <p>نحن متحمسون لانضمامك إلينا. يرجى ملء النموذج أدناه.</p>
+            <div class="google-form-container" style="display: flex;flex-direction: column; align-items: center;justify-content: center;">
+            <iframe style="max-width: 100%; min-width: 50px;" src="https://docs.google.com/forms/d/e/1FAIpQLSdvUx_5AUqdXGznMnkIrs7L_smpYLLJiZqvUA7zCAfcKajLig/viewform?embedded=true" width="640" height="906" frameborder="0" marginheight="0" marginwidth="0">جارٍ التحميل…</iframe>                <p style="text-align: center; padding: 50px; background: #f0f0f0; border-radius: 5px;">
+                    <!-- <strong>ملاحظة:</strong> قم بلصق كود النموذج المضمن من Google Forms هنا ليظهر بدلاً من هذا النص. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Silkera</h3>
+                    <p>منصتك الأولى نحو عالم الحرير. نحن نسعى لبناء مستقبل مستدام ومزدهر لتربية دود الحرير في العالم العربي.</p>
+                </div>
+                <div>
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#about" onclick="showPage('main')">من نحن</a></li>
+                        <li><a href="#services" onclick="showPage('main')">خدماتنا</a></li>
+                        <li><a href="#survey" onclick="showPage('main')">استبيان</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>تواصل معنا</h3>
+                    <p>info@silkera.com</p>
+                    <p><a href="https://wa.me/201501021670" target="_blank" style="color: var(--light-color);">واتساب: 01501021670</a></p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Silkera. | جميع الحقوق محفوظة. </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/201501021670" class="whatsapp-float" target="_blank" title="تواصل معنا على واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenu.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        function closeMobileMenu() {
+            navLinks.classList.remove('active');
+            const icon = mobileMenu.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Page Navigation Logic (for survey/signup)
+        function showPage(pageId) {
+            const mainContent = document.getElementById('main-content');
+            const surveyPage = document.getElementById('survey-page');
+            const signupPage = document.getElementById('signup-page');
+
+            mainContent.style.display = 'none';
+            surveyPage.classList.remove('active');
+            signupPage.classList.remove('active');
+
+            if (pageId === 'survey-page') {
+                surveyPage.classList.add('active');
+                window.scrollTo(0, 0);
+            } else if (pageId === 'signup-page') {
+                signupPage.classList.add('active');
+                window.scrollTo(0, 0);
+            } else { // main page
+                mainContent.style.display = 'block';
+            }
+        }
+        
+        // Intersection Observer for Fade In Animations
+        const observerOptions = {
+            root: null,
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        const animatedElements = document.querySelectorAll('.fade-in-up');
+        animatedElements.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
